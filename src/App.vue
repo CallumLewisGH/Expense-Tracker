@@ -14,14 +14,12 @@ import Balance from './components/Balance.vue';
 import IncomeExpenses from './components/IncomeExpenses.vue';
 import TransactionList from './components/TransactionList.vue';
 import AddTransaction from './components/AddTransaction.vue';
-
 import { ref, computed } from 'vue';
+import {useToast} from 'vue-toastification';
 
+const toast = useToast();
 
-const transactions = ref([
-    {id:1, text: "Salary", amount: 300},
-    {id:2, text: "Date", amount: -100}
-    ]);
+const transactions = ref([]);
 
 // Balance
 const total = computed(() => {
@@ -56,8 +54,9 @@ const transactionHandler = (transactionInfo) => {
         id: idMaker(),
         text: transactionInfo.text,
         amount: transactionInfo.amount,
-        })
-    };
+    });
+    toast.success('Transaction added!')
+};
 
 //Id Maker
 const idMaker = () => {
