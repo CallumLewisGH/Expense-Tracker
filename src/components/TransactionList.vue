@@ -9,8 +9,11 @@
 </template>
 
 <script setup>
-    const transactions=
-    [{id:1, text: "Salary", amount: 300},
-    {id:2, text: "Date", amount: -100}
-    ];
+    import { defineProps} from 'vue';
+    const props = defineProps({
+        transactions: {
+            type: Array,
+            required: true
+        }
+    })
 </script>
