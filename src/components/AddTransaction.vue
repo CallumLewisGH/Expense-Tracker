@@ -21,12 +21,21 @@
     const text = ref('');
     const amount = ref('');
     const toast = useToast();
+    const emit = defineEmits(['transactionSubmit']);
 
     const onSubmit = () => {
         if (!text.value || !amount.value) {
             toast.error('Both fields must be filled');
             return;
         }
+
+        const transactionInfo = {
+            text: text.value,
+            amount: parseFloat(amount.value)
+        };
+
+        emit('transactionSubmit', transactionInfo)
+
         text.value = '';
         amount.value = '';
     };

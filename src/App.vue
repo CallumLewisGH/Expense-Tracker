@@ -4,7 +4,7 @@
             <Balance :total= "total"></Balance>
             <IncomeExpenses :expenses="+expenses" :income="+income"></IncomeExpenses>
             <TransactionList :transactions = "transactions"></TransactionList>
-            <AddTransaction></AddTransaction>
+            <AddTransaction @transactionSubmit="transactionHandler"></AddTransaction>
     </div>
 </template>
 
@@ -49,4 +49,19 @@ const expenses = computed(() => {
     }, 0)
     .toFixed(2);
 });
+
+//Adds transactions
+const transactionHandler = (transactionInfo) => {
+    transactions.value.push({
+        id: idMaker(),
+        text: transactionInfo.text,
+        amount: transactionInfo.amount,
+        })
+    };
+
+//Id Maker
+const idMaker = () => {
+    return transactions.value.length + 1;
+}
+
 </script>
