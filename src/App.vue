@@ -3,7 +3,7 @@
     <div class="container">
             <Balance :total= "total"></Balance>
             <IncomeExpenses :expenses="+expenses" :income="+income"></IncomeExpenses>
-            <TransactionList :transactions = "transactions"></TransactionList>
+            <TransactionList @transactionDeleted= "deletedTransactionHandler" :transactions = "transactions"></TransactionList>
             <AddTransaction @transactionSubmit="transactionHandler"></AddTransaction>
     </div>
 </template>
@@ -61,6 +61,14 @@ const transactionHandler = (transactionInfo) => {
 //Id Maker
 const idMaker = () => {
     return transactions.value.length + 1;
+}
+
+//Deletes Transaction
+
+const deletedTransactionHandler = (id) => {
+    transactions.value = transactions.value.filter((transaction) =>
+    transaction.id !== id);
+    toast.success('Transaction Deleted!')
 }
 
 </script>
